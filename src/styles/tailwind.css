@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h2,
+  img {
+    cursor: url(curser.svg) 25 25, auto;
+  }
+}
