@@ -12,9 +12,11 @@ import overouticm from "../assets/images/over-out-icm.jpeg";
 import pierre from "../assets/images/pierre.jpeg";
 import tyndfilm from "../assets/images/tynd-film.jpg";
 import "../styles/tobii.min.css";
+import air from "../assets/images/air-woosh.mp3";
+
 ---
 <MainLayout title="Titel">
-	<article class="">
+	<article class=""x-data>
 		<section class="max-w-xl mx-auto mt-32 prose" id="titel">
 			<h2 class="text-9xl text-orange-600">Uperfekt er perfekt</h2>
 		</section>
@@ -75,8 +77,13 @@ import "../styles/tobii.min.css";
 			</div>
 			<div class="grid grid-cols-2 gap-4 max-w-4xl mx-auto my-8 items-center prose">
 				<div>
+
+					<audio x-ref="air">
+					<source src="air-woosh.mp3" type="audio/mpeg">
+					</audio>
+
 					<a href="glitch.jpg" class="lightbox">
-						<Image src={glitch} alt="" class="my-0" />
+						<Image src={glitch} alt="" class="my-0 cursor handcursor" @click="$refs.air.play()" />
 						<figcaption>Glitch kunst</figcaption>
 					</a>
 				</div>
