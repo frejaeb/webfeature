@@ -33,6 +33,7 @@ import air from "../assets/images/air-woosh.mp3";
 					<figcaption>Pierre Falcke, selvportræt</figcaption>
 				</a>
 			</div>
+			<div class="stagger">
 			<p class="text-2xl italic text-center bg-orange-700 p-8 text-white">
 				Pierre sælger 2 millioner fotos om året
 			</p>
@@ -42,6 +43,7 @@ import air from "../assets/images/air-woosh.mp3";
 			<p class="text-2xl italic text-center  bg-orange-700 p-8 text-white">
 				Du ser hans fotos ca. 2 gange om dagen
 			</p>
+			</div>
 		</section>
 		<section class="max-w-4xl mx-auto my-32 prose border border-double border-black p-8" id="hvaderstockfotos">
 			<h2 class="text-2xl text-orange-600">Hvad er stock-fotos?</h2>
@@ -124,14 +126,14 @@ import air from "../assets/images/air-woosh.mp3";
 				<p>Men Pierre er glad for sin beslutning. Indkomsten er lavere nu, men han har stadig lidt penge på kontoen, og studerer nu kunstfotografering på fotoskolen Fatamorgana. Han glæder sig over hver dags kunstneriske eksperimenter, og er for første gang i sit liv rigtig stolt af sit arbejde. Som Pierre selv udtrykker det: <span class="italic">“Det interessante ligger i fejlen. Et foto med masser af fejl er interessant. Jeg eksperimenterer med udstyr og teknik, og skaber nye visuelle udtryk. Det uperfekte er perfekt.”</span></p>
 			</div>
 			<div class="grid grid-cols-2 gap-4 max-w-4xl mx-auto my-8 items-center prose">
-				<div>
+				<div class="stag1">
 					<a href="over-out-icm.jpeg" class="lightbox">
 						<Image src={overouticm} alt="" class="my-0" />
 						<figcaption>Overeksponeret og ude af fokus</figcaption>
 					</a>	
 				</div>
-				<div>
-					<a href="tynd-film.jpg" class="lightbox">
+				<div class="stag2">
+					<a href="tynd-film.jpg" class="lightbox opacity-0 timelineanimation">
 						<Image src={tyndfilm} alt="" class="my-0" />
 						<figcaption>Overeksponeret og ude af fokus</figcaption>
 					</a>
@@ -149,24 +151,50 @@ import air from "../assets/images/air-woosh.mp3";
 			</div>
 		</section>
 	</article>
+
+	<div class="progress-bar h-4 fixed w-full bg-rose-900 left-0 origin-top-left top-0 right-0"></div>
+
 </MainLayout>
 <script is:inline src="tobii.min.js"></script>
 <script defer>
 	const tobii = new Tobii(); 
 </script>
 <script>
-	/* Import af Motion One bibliotek */
-import { animate, stagger, inView, scroll, timeline } from "motion";
+		/* Import af Motion One bibliotek */
+	import { animate, stagger, inView, scroll, timeline } from "motion";
 
- animate( "body", { opacity: [ 0, 1] }, { duration: 5 })
+	animate( "body", { opacity: [ 0, 1] }, { duration: 5 })
 
- inView( ".img1" , (info) =>{
-  animate( info.target, { x: [2000, 1 ] }, { duration: 6 })
-})
 
-inView( ".fotogalleryinview" , ({ target }) =>{
-  animate( target.querySelectorAll("img") , { x: [-2000, 0 ] }, 
+	inView( ".img1" , (info) =>{
+	animate( info.target, { x: [2000, 1 ] }, { duration: 6 })
+	})
+
+
+/*  inView( ".stag" , ({ target }) =>{
+  animate( target.querySelectorAll("img") , { x: [-2000, 3 ] }, 
   { duration: 1, delay: stagger(1, { start: 0.25 }) 
   })
-})
+})  */
+
+	inView(".stagger", ()=>{
+	animate(
+	".stagger p",
+	{ opacity: [0, 1] },
+	{ 
+		delay: stagger(1, { start: 2 })
+	}
+	) 
+	})
+
+	scroll( animate(".progress-bar", { scaleX: [0, 1] }));
+	
+  const timelineanimation = [
+  [".timelineanimation", { opacity: 1 }, { duration: 5 }],
+  [".timelineanimation", { transform: "rotate(360deg)" }, { duration: 3 }],
+  [".timelineanimation", { transform: "scale(1.5)" }, { duration: 0.5 }],
+  [".timelineanimation", { transform: "scale(1)" }, { duration: 1 }],
+]
+timeline( timelineanimation );
+
 </script>
