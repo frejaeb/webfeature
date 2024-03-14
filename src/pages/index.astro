@@ -140,7 +140,7 @@ import air from "../assets/images/air-woosh.mp3";
 			<div class="max-w-xl mx-auto my-32 prose">
 				<p>Karrieren begynder også så småt også at gå den rette vej: Pierre er begyndt at sælge fotokunst på nettet, og har udgivet sin første foto-bog med titlen “Lidt i fem,” som er en fotografisk odyssé om at slæbe en brandert hjem i de tidlige morgentimer. I forbindelse med udgivelsen af bogen, har han en udstilling på vej i det Kongelige Biblioteks fotoudstilling.</p>
 				<p>Som Pierre forklarer det: <span class="italic">“Nu kan jeg leve livet igen. Jeg føler mig frisk. Jeg føler mig fri. Jeg føler mig genfødt.”</span></p>			
-				<div>
+				<div class="img1">
 					<a href="lidtifem-pierre-falcke.jpg" class="lightbox" alt="">
 						<Image src={lidtifem} alt="" class="my-0" />
 						<figcaption>Lidt i fem - ny bog af Pierre Falcke</figcaption>
@@ -153,4 +153,20 @@ import air from "../assets/images/air-woosh.mp3";
 <script is:inline src="tobii.min.js"></script>
 <script defer>
 	const tobii = new Tobii(); 
+</script>
+<script>
+	/* Import af Motion One bibliotek */
+import { animate, stagger, inView, scroll, timeline } from "motion";
+
+ animate( "body", { opacity: [ 0, 1] }, { duration: 5 })
+
+ inView( ".img1" , (info) =>{
+  animate( info.target, { x: [2000, 1 ] }, { duration: 6 })
+})
+
+inView( ".fotogalleryinview" , ({ target }) =>{
+  animate( target.querySelectorAll("img") , { x: [-2000, 0 ] }, 
+  { duration: 1, delay: stagger(1, { start: 0.25 }) 
+  })
+})
 </script>
